@@ -1,0 +1,22 @@
+{
+  "name": "mesh",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter web dev\" \"pnpm --filter api dev\"",
+    "build": "pnpm --filter web build && pnpm --filter api build",
+    "lint": "pnpm --filter web lint && pnpm --filter api lint",
+    "typecheck": "pnpm --filter web typecheck && pnpm --filter api typecheck",
+    "test": "pnpm --filter api test",
+    "clean": "pnpm -r clean"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "typescript": "^5.6.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

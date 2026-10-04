@@ -1,0 +1,27 @@
+name: Foundry CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  foundry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - name: Install dependencies
+        run: |
+          forge install --no-commit OpenZeppelin/openzeppelin-contracts
+          forge install --no-commit foundry-rs/forge-std
+      - name: Check formatting
+        run: forge fmt --check
+      - name: Build contracts
+        run: forge build
+      - name: Run tests
+        run: forge test -vvv
